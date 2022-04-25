@@ -1,0 +1,24 @@
+nav {
+	position: fixed;
+	padding: .5rem 0 .5rem;
+
+	background-color: #f80032;
+	color: #f3f3f3;
+	width: 100vw;
+	top: 0;
+}
+
+.title {
+	font-size: 36px;
+}
+
+.items {
+	display: flex;
+	justify-content: space-around;
+
+	list-style: none;
+}
+
+.items li:hover {
+	font-weight: 700;
+}

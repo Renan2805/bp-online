@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import NavBar from './components/NavBar'
+import PRODUCTS from './data/products'
+
+import './App.css'
+import ProductCard from './components/ProductCard'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const [searchTerm, setSearchTerm] = useState('')
+
+	return (
+		<div className="App">
+			<NavBar />
+			<main>
+				<input 
+					id=""
+					type="text" 
+					placeholder="Buscar Produto" 
+					onChange={(event) => { 
+						setSearchTerm(event.target.value.toString().toLocaleLowerCase())
+					}}
+				/>
+				<div className="principais-destaques">
+					{
+						// wtfffffffffffffffffffffff
+						PRODUCTS.filter((item) => {
+							if (searchTerm === '') return item
+							else if (item.searchTerms.find((i) => {
+								if (i.includes(searchTerm)) {
+									return true
+								} else return false
+							})) return item
+							
+						}).map((p, index) => (
+							<ProductCard product={p} key={index} />
+						))
+					}
+				</div>
+			</main>
+		</div>
+	)
 }
 
-export default App;
+export default App
